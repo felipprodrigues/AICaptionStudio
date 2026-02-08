@@ -1,33 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import generateCaption from './models/api.js';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [imgSrc, setImgSrc] = useState(null);
+  const [caption, setCaption] = useState("<Caption>");
+
+  const handleCaption = async () => {
+    setCaption("Generating caption...");
+    const newCaption = await generateCaption(imgSrc);
+
+    setCaption(newCaption[0]["generated_text"]);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1>Caption Generator</h1>
+
+      <div className="wrapper">
+        <div className="url-form">
+          <input type="text" onChange={e => setImgSrc(e.target.value)} />
+          <button onClick={() => handleCaption()}>Generate</button>
+        </div>
+        <div className="container-image">
+          <img height={200} src={imgSrc} />
+          <span>{caption}</span>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
