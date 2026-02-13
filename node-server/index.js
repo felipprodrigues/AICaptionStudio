@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-const {translate} = require("./models/api");
+const { translate } = require("./models/api");
+const { Translator } = require("./models/translator");
+
 const app = express();
 const port = 3000
 
@@ -14,10 +16,12 @@ app.get("/", (req, res) => {
   res.send("Hello")
 })
 
-app.post("/translate", (req, res) => {
+app.post("/translate", async (req, res) => {
   const textEng = req.body["text"]
 
-  res.send(translate(textEng))
+  const textPTBR = await translate(textEng)
+
+  res.send(textPTBR)
 })
 
 app.listen(port, () => {

@@ -12,7 +12,7 @@ async function translate(captionEng) {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      "text": captionEng
+      "text": captionEng[0]["generated_text"]
     })
   }).then(blob => blob.json())
 }
