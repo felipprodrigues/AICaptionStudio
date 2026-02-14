@@ -17,7 +17,20 @@ async function translate(captionEng) {
   }).then(blob => blob.json())
 }
 
+async function convertToAudio(captionPTBR) {
+  return fetch("http://localhost:5001/text-to-audio", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      "text": captionPTBR[0]["translation_text"]
+    })
+  }).then(blob => blob.json())
+}
+
 export {
+  convertToAudio,
   generateCaption,
   translate
 };

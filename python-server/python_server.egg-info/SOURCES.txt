@@ -1,0 +1,8 @@
+README.md
+main.py
+pyproject.toml
+python_server.egg-info/PKG-INFO
+python_server.egg-info/SOURCES.txt
+python_server.egg-info/dependency_links.txt
+python_server.egg-info/requires.txt
+python_server.egg-info/top_level.txt
